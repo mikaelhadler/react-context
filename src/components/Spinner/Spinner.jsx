@@ -1,6 +1,6 @@
 import './Spinner.css';
 
-function Spinner() {
+export function Spinner() {
   return (
     <div className="lds-ripple">
       <div></div>
@@ -9,4 +9,4 @@ function Spinner() {
   );
 }
 
-export default Spinner;
+export default { Spinner };
