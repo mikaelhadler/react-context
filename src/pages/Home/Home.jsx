@@ -12,7 +12,7 @@ export function Home() {
       {state?.loading ? <Spinner /> : null}
       {state?.user && <h1>Welcome, {state.user.name}!</h1>}
       <button className="primary" onClick={() => login({ name: "John Doe", ...state })}>Login</button>
-      <button className="secondary" onClick={() => logout()}>Logout</button>
+      { state?.user && <button className="secondary" onClick={() => logout()}>Logout</button>}
     </div>
   );
 }

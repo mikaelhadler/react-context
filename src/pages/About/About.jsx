@@ -1,21 +1,66 @@
+import { useState, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { useAbout } from "../../hooks/useAbout";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { AboutContextProvider } from "../../contexts/AboutContext";
+import './About.css'
 
-const AboutContent = () => {
-  const { email, loading } = useAbout();
+let HeaderRerenderCounter = 0
+const HeaderComponent = ({ email }) => <h3>Email: {email}</h3>
+HeaderComponent.propTypes = {
+  email: PropTypes.string.isRequired
+}
+const Header = () => {
+  const { email } = useAbout();
+  console.log(email);
+  
+  const children = useMemo(() => <HeaderComponent email={email}/>, [email]);
+  console.log('Rerender - Header', HeaderRerenderCounter++);
+
+  return email && children
+};
+
+const NickName = () => {
+  const { nickname } = useAbout();
+  const NickNameComponent = useMemo(() => <h3>Nickname: {nickname}</h3>, [nickname]);
+
+  return nickname && NickNameComponent
+}
+
+let FormRerenderCounter = 0;
+const Form = () => {
+  const { nickname, setNickname } = useAbout();
+  const [nick, setNick] = useState(nickname || '');
+  console.log('Rerender - Form', FormRerenderCounter++);
   return (
+    <div className='form'>
+      <input value={nick} onChange={e => setNick(e.target.value)} placeholder='Type your nickname here' />
+      <button onClick={() => setNickname(nick)}>Set Nickname</button>
+    </div>
+  );
+}
+
+let AboutContentRerenderCounter = 0;
+const AboutContent = () => {
+  const { loading } = useAbout();
+  console.log('Rerender - AboutContent', AboutContentRerenderCounter++);
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       <h2>About</h2>
-      {loading && <Spinner />}
-      {email && <h3>{email}</h3>}
+      <Header />
+      <NickName />
+      <Form />
     </>
   );
 };
 export function About() {
-  return <AboutContextProvider>
-    <AboutContent />
-  </AboutContextProvider>;
+  return (
+    <AboutContextProvider>
+      <AboutContent />
+    </AboutContextProvider>
+  );
 }
 
 export default { About };
