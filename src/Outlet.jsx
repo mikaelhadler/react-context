@@ -14,11 +14,11 @@ export function Outlet() {
         <Route path="/users">
           <Users />
         </Route>
-        <Route path="/">
-          <Home />
-        </Route>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </main>
