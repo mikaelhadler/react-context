@@ -1,9 +1,8 @@
 # React Management State POC
 
 ## Objective
-The objective is to understand when management state libraries are better than context API and identify the side effects caused by the wrong usage of custom hooks.
-
 ![image](https://github.com/user-attachments/assets/226f4709-bba4-4d3b-acf0-a5abb2ed14d8)
+Prove the benefits of avoiding React Context API in large applications and the benefits of using an efficiently management state library like Redux.
 
 ## Questions to solve with rich examples
 - [ ] When should Context API be used?
