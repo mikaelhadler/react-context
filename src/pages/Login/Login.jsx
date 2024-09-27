@@ -1,11 +1,11 @@
 import { useReducer } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
-import { userDispatch, userReducer } from "../../hooks/useUser";
+import { userReducer, userDispatch } from "../../contexts/WithReducer/reducers/userReducer";
 
 export function Login() {
   const [state, dispatch] = useReducer(userReducer);
   const { login, logout } = userDispatch(dispatch);
-  
+
   {
     state?.loading ? <Spinner /> : null;
   }
@@ -31,7 +31,7 @@ export function Login() {
       email: e.target.email.value,
       password: e.target.password.value
     });
-    
+
   };
   return <LoginForm onSubmit={onSubmit} />;
 }

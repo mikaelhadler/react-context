@@ -1,14 +1,14 @@
 import { useReducer } from "react";
-import { userReducer, userDispatch } from "../../hooks/useUser";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { useUser } from "../../contexts/WithReducer/reducers/userReducer";
+
 let count = 0;
 export function Home() {
-  
-  console.log('Home - Rerender', count++);
-  
+  const { user, loading, error } = useUser();
+
   return (
     <div className="app">
-      
+
     </div>
   );
 }

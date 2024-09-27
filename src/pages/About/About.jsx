@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { useAbout } from "../../hooks/useAbout";
+import { useAbout } from "../../contexts/WithReducer/AboutContext";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { AboutContextProvider } from "../../contexts/AboutContext";
+import { AboutContextProvider } from "../../contexts/WithReducer/AboutContext";
 import './About.css'
 
 let HeaderRerenderCounter = 0
@@ -12,12 +12,7 @@ HeaderComponent.propTypes = {
 }
 const Header = () => {
   const { email } = useAbout();
-  console.log(email);
-  
-  const children = useMemo(() => <HeaderComponent email={email}/>, [email]);
-  console.log('Rerender - Header', HeaderRerenderCounter++);
-
-  return email && children
+  return email && useMemo(() => <HeaderComponent email={email}/>, [email])
 };
 
 const NickName = () => {

@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getUser } from "../api/dummy-json";
+import { getUser } from "../../api/dummy-json";
 
 const initialState = {
   about: null,
@@ -8,9 +8,9 @@ const initialState = {
   nickname: ''
 };
 
-const AboutContext = createContext(initialState);
-
-const AboutContextProvider = ({ children }) => {
+export const AboutContext = createContext(initialState);
+export const useAbout = () => useContext(AboutContext);
+export const AboutContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(initialState.loading);
   const [about, setAbout] = useState(initialState.about);
 
@@ -23,7 +23,7 @@ const AboutContextProvider = ({ children }) => {
       setLoading(true)
       setAbout(await getUser());
     } catch (error) {
-      console.error('getUserDetails', error);      
+      console.error('getUserDetails', error);
     } finally {
       setLoading(false)
     }
@@ -50,4 +50,4 @@ AboutContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { AboutContext, AboutContextProvider };
+export default { AboutContext, useAbout, AboutContextProvider };

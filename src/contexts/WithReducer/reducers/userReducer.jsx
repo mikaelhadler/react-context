@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
-import { getUser } from "../api/github";
-
-export const useUser = () => useContext(UserContext);
+import { UserContext } from "../UserContext";
+import { getUser } from "../../../api/github";
 
 export const userReducer = (state, action) => {
   switch (action.type) {
@@ -26,6 +24,7 @@ export const userReducer = (state, action) => {
   }
 };
 
+export const useUser = () => useContext(UserContext);
 export const userDispatch = (dispatch) => ({
   login: async () => {
     try {
