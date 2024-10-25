@@ -1,5 +1,4 @@
 # React Management State POC
-![image](https://github.com/user-attachments/assets/226f4709-bba4-4d3b-acf0-a5abb2ed14d8)
 
 ## Objective
 Prove the benefits of avoiding React Context API in large applications and the benefits of using an efficiently management state library like Redux.
