@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './components/redux/store';
+import { UserProvider } from './components/context/UserContext';
+import { CartProvider } from './components/context/CartContext';
+import MainDemo from './components/MainDemo';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <UserProvider>
+          <CartProvider>
+            <MainDemo />
+          </CartProvider>
+        </UserProvider>
+      </Provider>
+    </ErrorBoundary>
   );
-}
+};
 
 export default App;
